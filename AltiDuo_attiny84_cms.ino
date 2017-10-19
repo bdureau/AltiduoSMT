@@ -47,7 +47,7 @@ unsigned long mainDeployAltitude;
 /* TODO: those need to be changed for the attiny 84*/
 const int pinAltitude1 = 0;//3;//8;
 const int pinAltitude2 = 2;//7;
-const int pinAltitude3 = 3;
+const int pinUnit = 3;
 
 const int pinApogee = 10;///0;//10;
 const int pinMain = 7;//0;
@@ -73,17 +73,19 @@ float kalman_p_temp;
 //float KAlt;
 //end of Kalman Variables
 
+float FEET_IN_METER =1;
+
 void setup()
 {
   int val = 0;     // variable to store the read value
   int val1 = 0;     // variable to store the read value
-
+  int Unit = 0;
 
   //init Kalman filter
   KalmanInit();
   //Presure Sensor Initialisation
   //bmp.begin();
-  bmp.begin( BMP085_STANDARD);
+  bmp.begin( BMP085_ULTRALOWPOWER);
   //our drogue has not been fired
   apogeeHasFired=false;
   mainHasFired=false;
@@ -106,11 +108,18 @@ void setup()
   //initialisation give the version of the altimeter
   //One long beep per major number and One short beep per minor revision
   //For example version 1.2 would be one long beep and 2 short beep
-  beepAltiVersion(1,3);
+  beepAltiVersion(1,4);
   
   //number of measures to do to detect Apogee
   measures = 5;
-
+  
+  Unit = digitalRead(pinUnit); 
+  //set main altitude (if in feet convert to metrics)
+  if(Unit ==0)
+    FEET_IN_METER =1;
+  else
+    FEET_IN_METER =3.28084 ;
+    
   //initialise the deployement altitude for the main 
   mainDeployAltitude = 100;
 
@@ -135,7 +144,7 @@ void setup()
   {
     mainDeployAltitude = 50;
   }
-
+  //mainDeployAltitude = int(mainDeployAltitude/FEET_IN_METER)
   // let's do some dummy altitude reading
   // to initialise the Kalman filter
   for (int i=0; i<50; i++){
@@ -201,11 +210,11 @@ void loop()
   {
     beginBeepSeq();
 
-    beepAltitude(apogeeAltitude);
+    beepAltitude(apogeeAltitude* FEET_IN_METER);
 
     beginBeepSeq();
 
-    beepAltitude(mainAltitude);
+    beepAltitude(mainAltitude* FEET_IN_METER);
 
   }
 }
