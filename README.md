@@ -3,7 +3,7 @@ SMT version of the AltiDuo Mini. Warning! Not all components can be soldered by 
 Firmware for the [AltiDuo Mini SMT](http://rocket.payload.free.fr/index.php?option=com_content&view=article&id=26&Itemid=15&lang=en) altimeter using an ATtiny 84  microcontroller
 This is another version of the Alti Duo that is using an Attiny 84 processor. It is smaller than the other AltiDuo that is using an ATMega 328. However unlike the big AltiDuo it cannot connect to the USB port. You cannot remove the ship so it cannot be re-programmed. The ship is programmed before you solder it.
 
-<img src="/pictures/AltiDuoSMT-top.JPG" width="49%"><img src="/pictures/AltiDuoSMT-bottom.JPG.JPG" width="49%">
+<img src="/pictures/AltiDuoSMT-top.JPG" width="49%"> <img src="/pictures/AltiDuoSMT-bottom.JPG" width="49%">
 
 # Building the code
 You will need to download the Arduino ide from the [Arduino web site](https://www.arduino.cc/).
