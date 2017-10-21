@@ -13,4 +13,4 @@ Make sure that you download the following [support libraries](https://github.com
 You will need to use an AVR programmer and an adapter to program the microcotroller, refer to the documentation.
 
 # Using other pressure sensors
-Unfortunatly it is not possible to use a bmp280 sensor, I have ported the library but unfortunatly the attiny 85 has not enought on board memory.
+Unfortunatly it is not possible to use a bmp280 sensor, I have ported the library but the attiny 84 has not enought on board memory.
