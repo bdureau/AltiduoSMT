@@ -1,6 +1,6 @@
 /*
-  Model Rocket dual deployment altimeter Ver 1.3
- Copyright Boris du Reau 2012-2013
+  Model Rocket dual deployment altimeter Ver 1.5
+ Copyright Boris du Reau 2012-2021
  
  This is using a BMP085 presure sensor and an Attiny 84
  The following should fire the main at apogee if it is at least 50m above ground of the launch site
@@ -108,7 +108,7 @@ void setup()
   //initialisation give the version of the altimeter
   //One long beep per major number and One short beep per minor revision
   //For example version 1.2 would be one long beep and 2 short beep
-  beepAltiVersion(1,4);
+  beepAltiVersion(1,5);
   
   //number of measures to do to detect Apogee
   measures = 5;
@@ -186,13 +186,14 @@ void loop()
         delay (2000);
         apogeeHasFired=true;
         digitalWrite(pinApogee, LOW);
-        apogeeAltitude = currAltitude;
+        //apogeeAltitude = currAltitude;
+        apogeeAltitude = lastAltitude;
       }  
     }
     else 
     {
       lastAltitude = currAltitude;
-      measures = 10;
+      measures = 5;
     } 
   }
 
@@ -368,4 +369,3 @@ void beepAltiVersion (int majorNbr, int minorNbr)
     shortBeep();
   }  
 }
-
